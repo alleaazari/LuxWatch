@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { Product } from "@/data/products";
 
 export interface CartItem {
@@ -34,10 +34,24 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
+function loadFromStorage<T>(key: string, fallback: T): T {
+  try {
+    const saved = localStorage.getItem(key);
+    return saved ? JSON.parse(saved) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [cart, setCart] = useState<CartItem[]>([]);
-  const [favorites, setFavorites] = useState<number[]>([]);
-  const [orders, setOrders] = useState<Order[]>([]);
+  const [cart, setCart] = useState<CartItem[]>(() => loadFromStorage("luxwatch_cart", []));
+  const [favorites, setFavorites] = useState<number[]>(() => loadFromStorage("luxwatch_favorites", []));
+  const [orders, setOrders] = useState<Order[]>(() => loadFromStorage("luxwatch_orders", []));
+
+  // Persist to localStorage on every change
+  useEffect(() => { localStorage.setItem("luxwatch_cart", JSON.stringify(cart)); }, [cart]);
+  useEffect(() => { localStorage.setItem("luxwatch_favorites", JSON.stringify(favorites)); }, [favorites]);
+  useEffect(() => { localStorage.setItem("luxwatch_orders", JSON.stringify(orders)); }, [orders]);
 
   const addToCart = (product: Product) => {
     setCart((prev) => {
