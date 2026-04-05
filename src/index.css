@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 40% 8%;
+    --foreground: 210 40% 96%;
+
+    --card: 220 40% 13%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 220 40% 10%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 220 40% 4%;
+
+    --secondary: 220 30% 18%;
+    --secondary-foreground: 210 40% 96%;
+
+    --muted: 220 20% 20%;
+    --muted-foreground: 215 16% 56%;
+
+    --accent: 217 91% 50%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 30% 22%;
+    --input: 217 30% 22%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.75rem;
+
+    --glass-bg: 217 60% 20%;
+    --glass-border: 217 40% 30%;
+    --gradient-start: 217 91% 60%;
+    --gradient-end: 240 70% 50%;
+
+    --sidebar-background: 220 40% 8%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 220 30% 18%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 217 30% 22%;
+    --sidebar-ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-glass/30 backdrop-blur-xl border border-glass-border/30 shadow-lg;
+  }
+  .glass-card {
+    @apply backdrop-blur-lg rounded-xl;
+    background: hsl(var(--glass-bg) / 0.15);
+    border: 1px solid hsl(var(--primary) / 0.2);
+    box-shadow: 0 0 15px hsl(var(--primary) / 0.15), inset 0 0 15px hsl(var(--primary) / 0.03);
+    transition: box-shadow 0.3s, border-color 0.3s;
+  }
+  .glass-card:hover {
+    border-color: hsl(var(--primary) / 0.4);
+    box-shadow: 0 0 25px hsl(var(--primary) / 0.25), inset 0 0 20px hsl(var(--primary) / 0.05);
+  }
+  .gradient-bg {
+    background: linear-gradient(135deg, hsl(var(--gradient-start)) 0%, hsl(var(--gradient-end)) 100%);
+  }
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--gradient-start)) 0%, hsl(217 91% 80%) 100%);
+  }
+  .btn-glow {
+    @apply rounded-full border border-primary/40 px-8 py-3 font-semibold text-sm transition-all duration-300;
+    background: hsl(var(--glass-bg) / 0.5);
+    box-shadow: 0 0 15px hsl(var(--primary) / 0.3), inset 0 0 15px hsl(var(--primary) / 0.05);
+  }
+  .btn-glow:hover {
+    border-color: hsl(var(--primary) / 0.7);
+    box-shadow: 0 0 25px hsl(var(--primary) / 0.5), inset 0 0 20px hsl(var(--primary) / 0.1);
+  }
+  .btn-glow-primary {
+    @apply btn-glow;
+    background: linear-gradient(135deg, hsl(var(--gradient-start) / 0.3) 0%, hsl(var(--gradient-end) / 0.3) 100%);
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.4), inset 0 0 15px hsl(var(--primary) / 0.1);
+  }
+  .btn-glow-primary:hover {
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.6), inset 0 0 25px hsl(var(--primary) / 0.15);
+  }
+}
+
+@layer utilities {
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+}
