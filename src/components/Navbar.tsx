@@ -21,9 +21,9 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-glass-border/20">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/30 backdrop-blur-xl">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <Link to="/" className="text-xl font-bold gradient-text">⌚ LuxWatch</Link>
+          <Link to="/" className="text-xl font-bold gradient-text">LuxWatch</Link>
 
           {/* Desktop */}
           <div className="hidden md:flex items-center gap-8">
@@ -74,7 +74,7 @@ const Navbar = () => {
 
         {/* Mobile */}
         {menuOpen && (
-          <div className="md:hidden glass border-t border-glass-border/20 animate-fade-in">
+          <div className="md:hidden bg-background/40 backdrop-blur-xl animate-fade-in">
             <div className="flex flex-col p-4 gap-3">
               {navItems.map((item) => (
                 <Link key={item.to} to={item.to} onClick={() => setMenuOpen(false)} className={`text-sm font-medium py-2 ${location.pathname === item.to ? "text-primary" : "text-foreground/70"}`}>
